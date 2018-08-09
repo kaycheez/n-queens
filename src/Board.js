@@ -151,15 +151,21 @@
       var counter = 0;
       var length = this.get('n');
       
-
+      // debugger;
       for (let i = 0; i < length; i++) {
         for (let j = 0; i < length; i++) {
-          if (this._getFirstRowColumnIndexForMajorDiagonalOn(this.get(i), this.get(i)) === majorDiagonalColumnIndexAtFirstRow) {
-              
+          // console.log(this._getFirstRowColumnIndexForMajorDiagonalOn(j, i) === majorDiagonalColumnIndexAtFirstRow);
+          if (this._getFirstRowColumnIndexForMajorDiagonalOn(j, i) === majorDiagonalColumnIndexAtFirstRow) {
+              if (this.get(i)[j] === 1) {
+                counter++;
+              }
           }
         }
       }
-
+      // console.log(counter);
+      if (counter > 1) {
+        return true;
+      }
       return false; // fixme
     },
 
@@ -167,7 +173,7 @@
     hasAnyMajorDiagonalConflicts: function() {
       var row = this.get('0');
       for (var i = 0; i < row.length; i++) {
-        if (this.hasAnyMajorDiagonalConflicts(i)) {
+        if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
         }
       }
